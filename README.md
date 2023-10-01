@@ -26,9 +26,9 @@ Google python virtual environment
 pip install -r requirements.txt
 ```
 
-1. Select branch to work on (main - Production/ testing_ground - Experiment)
+3. Select branch to work on (main - Production/ testing_ground - Experiment)
 ```base
-git checkout main / testing_ground
+git checkout {branch_name}
 ```
 
 
