@@ -3,4 +3,4 @@ openai
 PyPDF2
 tiktoken
 faiss-cpu
-django
+Django
