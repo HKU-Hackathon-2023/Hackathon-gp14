@@ -31,8 +31,6 @@ pip install -r requirements.txt
 git checkout {branch_name}
 ```
 
-
-
 # Usage
 
 # Contributing
