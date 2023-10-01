@@ -17,10 +17,12 @@ A brief description of the project goes here.
 
 # Installation
 (Optional) Create virtual environment 
-    Google python virtual environment
+```Google python virtual environment```
 
 Install requried Packages
-    pip install -r requirements.txt
+```python
+pip install -r requirements.txt
+```
 
 
 
