@@ -16,10 +16,12 @@ A brief description of the project goes here.
 # Features
 
 # Installation
-(Optional) Create virtual environment 
-```Google python virtual environment```
+1. (Optional) Create virtual environment 
+```
+Google python virtual environment
+```
 
-Install requried Packages
+2. Install requried Packages
 ```python
 pip install -r requirements.txt
 ```
