@@ -41,7 +41,8 @@ Contact Information
 Optionally, you can provide contact information for users to reach out to you in case they have questions or need support.
 
 
-
+# Notion:
+[STEP](https://innowinggenai.notion.site/Building-ChatGPT-Your-Way-Empower-Your-AI-Creativity-e00eae7fa2dc4934b821e7b936482de5)
 
 
 
