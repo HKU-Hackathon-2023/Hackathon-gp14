@@ -10,6 +10,7 @@ A brief description of the project goes here.
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
+- [Notion:](#notion)
 
 # Project Description
 
@@ -55,12 +56,3 @@ Features & functions
 - Recap
 - Notes (Notes making)
 - Daily Challenge & Awards
-
-
-
-
-Font End 
-
-
-Back End
-
