@@ -119,11 +119,11 @@ export const QuestionInput = ({ onSend, disabled, placeholder, clearOnSend }: Pr
 
     return (
         <Stack horizontal className={styles.questionInputContainer}>
-            <div className={styles.questionInputButtonsContainer}>
+            {/* <div className={styles.questionInputButtonsContainer}>
                 <div className={styles.questionInputMicButton} aria-label="Toggle speech input button" onClick={toggleListening}>
                     {isListening ? <Mic28Filled primaryFill="#62a04e" /> : <Mic28Filled primaryFill="rgba(0, 0, 0, 0.4)" />}
                 </div>
-            </div>
+            </div> */}
             <textarea
                 className={styles.questionInputTextArea}
                 placeholder={placeholdertext}

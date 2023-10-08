@@ -49,9 +49,10 @@ export const avatar_const: {
         y: 0.55,
         z: 0.1,
         r: 0.15,
-        filename: "Mary.glb",
+        filename: "__FILENAME__.glb",
         bg: "background.jpg",
-        voice: "en-US-NatashaNeural",
+        voice: "__VOICE__",
+
         head_dic: "Head",
         head: "Wolf3D_Head",
         teeth_dic: "Teeth",

@@ -53,7 +53,7 @@ const Chat = () => {
     const [voice, setVoice] = useState<string>("en-US-JennyNeural");
     const voiceOptions: IDropdownOption[] = [
         { key: "en-US-JennyNeural", text: "Default: Jenny" },
-        { key: "en-US-NatashaNeural", text: "Natasha"},
+        { key: "en-US-__Name__Neural", text: "__Name__"},
     ];
 
     // TODO set defualt avatar
@@ -290,7 +290,7 @@ const Chat = () => {
                         </div>
                         {!lastQuestionRef.current && mode != "avatar" ? (
                             <div className={styles.chatEmptyState}>
-                                <h1 className={styles.chatEmptyStateTitle}>Chat about Innovation Wing</h1>
+                                <h1 className={styles.chatEmptyStateTitle}>Chat about your own data</h1>
                                 <h2 className={styles.chatEmptyStateSubtitle}>Ask anything or try an example</h2>
                                 <ExampleList onExampleClicked={onExampleClicked} />
                             </div>
@@ -367,7 +367,7 @@ const Chat = () => {
                         isFooterAtBottom={true}
                     >
                         
-                        <Dropdown
+                        {/* <Dropdown
                             onChange={onVoiceModelChange}
                             className={styles.chatSettingsSeparator}
                             defaultSelectedKey={voice}
@@ -383,7 +383,7 @@ const Chat = () => {
                             label="Activate Text to Speech"
                             onChange={() => setActivateTTS(!activateTTS)}
                             disabled={mode == "avatar"}
-                        />
+                        /> */}
 
                         <SpinButton
                             className={styles.chatSettingsSeparator}

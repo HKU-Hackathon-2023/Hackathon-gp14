@@ -12,18 +12,8 @@ const EXAMPLES: ExampleModel[] = [
         text: "Who has the access to InnoWing?",
         value: "Who has the access to Innovation Wing?"
     },
-    {   
-        text: "How to become a member of InnoWing?", 
-        value: "How to become a member of InnoWing?" 
-    },
-    {
-        text: "What is SIG?", 
-        value: "What is SIG?" 
-    },
-    {
-        text: "Who am i?",
-        value: "Who am i?"
-    }
+    { text: "How to become a member of InnoWing?", value: "How to become a member of InnoWing?" },
+    { text: "What is SIG?", value: "What is SIG?" }
 ];
 
 interface Props {
