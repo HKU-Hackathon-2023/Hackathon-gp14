@@ -1,6 +1,0 @@
-langchain
-openai
-PyPDF2
-tiktoken
-faiss-cpu
-django
