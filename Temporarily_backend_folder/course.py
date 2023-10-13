@@ -12,27 +12,27 @@ class Course:
             "week 1": {
                 "topic": str, # Topic for the week
                 "sub topic": list(), # [[sub_topic_1, completed?], ]
-                "chat history": None
+                "chat history": None # User communication record with GPT
             },
             "week 2": {
                 "topic": str, # Topic for the week
                 "sub topic": list(), # [[sub_topic_1, completed?], ]
-                "chat history": None
+                "chat history": None # User communication record with GPT
             },
             "week 3": {
                 "topic": str, # Topic for the week
                 "sub topic": list(), # [[sub_topic_1, completed?], ]
-                "chat history": None
+                "chat history": None # User communication record with GPT
             },
             "week 4": {
                 "topic": str, # Topic for the week
                 "sub topic": list(), # [[sub_topic_1, completed?], ...]
-                "chat history": None
+                "chat history": None # User communication record with GPT
             }
         }
-        self.teaching_materials = None
+        self.teaching_materials = None # Teaching materials/ source for this course
 
-    def create_course(self):
+    # Class function
 
 
 
