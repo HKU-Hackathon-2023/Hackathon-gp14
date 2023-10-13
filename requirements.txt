@@ -2,3 +2,4 @@ django
 langchain 
 openai
 python-dotenv
+requests
