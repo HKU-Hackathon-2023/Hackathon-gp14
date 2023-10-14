@@ -1,12 +1,10 @@
-import os
 import azure.cognitiveservices.speech as speechsdk
 
 SPEECH_KEY = "c08374bc35f74d46b1442fe01b4fcdc9"
+service_region = "eastasia"
 
-service_region = 'eastasia'
-
-def recognize(file_name):
-    # This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
+def convert_speech_to_text(file_name):
+    """This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"""
     speech_config = speechsdk.SpeechConfig(subscription=SPEECH_KEY, region=service_region)
     speech_config.speech_recognition_language="en-US"
 
@@ -26,4 +24,4 @@ def recognize(file_name):
             print("Error details: {}".format(cancellation_details.error_details))
             print("Did you set the speech resource key and region values?")
 
-recognize('recording_1.wav')
+convert_speech_to_text('./recording_1.wav')
