@@ -1,5 +1,60 @@
 {% extends 'base.html' %}
+
+{% load static %}
+
+{% block styles%}
+<link href="{% static 'css/classroom.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-    <h1>Classroom</h1>
-    <!-- Additional content for the classroom page -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col custom-column">
+            <h2>Column 1</h2>
+            <p>This is the content of column 1.</p>
+        </div>
+        <div class="col custom-column">
+            <div class="card">
+                <div class="card-body msg_card_body">
+                    <div class="d-flex justify-content-end mb-4">
+                        <div class="msg_cotainer_send">
+                            Ok, thank you have a good day
+                        </div>
+                        <div class="img_cont_msg">
+                            <img src="https://avatars.hsoubcdn.com/ed57f9e6329993084a436b89498b6088?s=256"
+                                class="rounded-circle user_img_msg">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-start mb-4">
+                        <div class="img_cont_msg">
+                            <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                                class="rounded-circle user_img_msg">
+                        </div>
+                        <div class="msg_cotainer">
+                            I am looking for your next templates
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="input-group">
+                        <span class="input-group-text attach_btn">
+                            <label for="file_input" class="file_label" style="display: flex; align-items: center;">
+                                <i class="fas fa-paperclip"></i>
+                            </label>
+                            <input type="file" id="file_input" class="file_upload" style="display: none;">
+                        </span>
+                        <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
+                        <div class="input-group-append">
+                            <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col custom-column">
+            <h2>Column 3</h2>
+            <p>This is the content of column 3.</p>
+        </div>
+    </div>
+</div>
 {% endblock %}
