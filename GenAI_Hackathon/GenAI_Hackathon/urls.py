@@ -17,5 +17,9 @@ Including another URLconf
 from django.urls import path
 from . import views
 urlpatterns = [
-    path('', views.home, name='app-home'),
+    path('home', views.home, name='home'),
+    path('classroom', views.classroom, name='classroom'),
+    path('note', views.note, name='classroom'),
+    path('bookmark', views.bookmark, name='classroom'),
+    path('dailychallenge', views.dailychallenge, name='classroom'),
 ]
