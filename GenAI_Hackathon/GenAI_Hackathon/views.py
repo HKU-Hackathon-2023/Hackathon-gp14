@@ -13,6 +13,12 @@ def classroom(request):
     }
     return render(request, 'classroom.html', context)
 
+def courses(request, course, topic):
+    context = {
+        'active_item': 'courses'
+    }
+    return render(request, 'classroom.html', context)
+
 def note(request):
     context = {
         'active_item': 'note'

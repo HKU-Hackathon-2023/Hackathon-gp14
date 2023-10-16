@@ -20,7 +20,8 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('home', views.home, name='home'),
     path('classroom', views.classroom, name='classroom'),
-    path('note', views.note, name='classroom'),
-    path('bookmark', views.bookmark, name='classroom'),
-    path('dailychallenge', views.dailychallenge, name='classroom'),
+    path('note', views.note, name='note'),
+    path('bookmark', views.bookmark, name='bookmark'),
+    path('dailychallenge', views.dailychallenge, name='dailychallenge'),
+    path('courses/<str:course>/<str:topic>/', views.courses, name='courses')
 ]
