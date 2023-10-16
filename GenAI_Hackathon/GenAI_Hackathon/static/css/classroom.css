@@ -1,7 +1,6 @@
 .card {
 	height: 100vh;
 	border-radius: 15px !important;
-	background-color: rgba(0, 0, 0, 0.4) !important;
 }
 
 .msg_card_body {
@@ -73,9 +72,9 @@
 .msg_cotainer {
 	margin-top: auto;
 	margin-bottom: auto;
-	margin-left: 10px;
-	border-radius: 25px;
-	background-color: #82ccdd;
+	margin-left: -10px;
+	border-radius: 15px;
+	background-color: #f6f7f6;
 	padding: 10px;
 	position: relative;
 }
@@ -83,15 +82,16 @@
 .msg_cotainer_send {
 	margin-top: auto;
 	margin-bottom: auto;
-	margin-right: 10px;
-	border-radius: 25px;
-	background-color: #78e08f;
+	margin-right: -10px;
+	border-radius: 15px;
+	background-color: #3b3abe;
+	color: white;
 	padding: 10px;
 	position: relative;
 }
 
 .input-group-text {
-    padding: 1.375rem 0.75rem;
+	padding: 1.375rem 0.75rem;
 }
 
 /* width */
@@ -106,7 +106,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    margin-left: 1px;
+	margin-left: 1px;
 	background: #888;
 }
 
@@ -121,4 +121,10 @@
 	.contacts_card {
 		margin-bottom: 15px !important;
 	}
+}
+
+.listening #microphone-status {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
