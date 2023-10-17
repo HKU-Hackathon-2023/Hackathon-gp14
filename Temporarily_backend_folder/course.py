@@ -1,10 +1,5 @@
 from langchain.schema import SystemMessage, AIMessage, HumanMessage
-
-estimate_week_complete_prompt = f"You are a teacher specialising in teaching deaf student. He is a {education_level} student"
-
-
-
-
+import Student
 
 class Course:
     
@@ -15,6 +10,7 @@ class Course:
         self.weekly_teaching_schedule: {
             "week 1": {
                 "topic": str, 
+                "Description": str, # Description of the week on what would be included
                 "sub topic": list(), 
                 "chat history": None
             },
@@ -39,15 +35,30 @@ class Course:
         """This will pass the course schedule to GPT to ask it to think a name for the course"""
     
     def estimate_number_of_weeks_to_complete():
+        """This function is temporality deactive"""
+        pass
         
         
+    def generate_weekly_topic(self, student: Student):
+        """This function generate the topic that would teach each week"""
+
+        # Create a OpenAI Chat Instant
+        chat = 
+
+        # Chat with 
+        weekly_topics_list = chat([SystemMessage(content="""You are a teacher specialised in teaching deaf student. You are now designing a 
+                                                 course outline for them to learn their interested topics outside of classroom. 
+                                                 Consider their education level, and special education need while designing the outline"""),
+                                    HumanMessage(content="""Your student is interested in """)])
 
     def generate_weekly_teaching_schedule(self, estimated_week = 4):
         """This function generate the weekly topic"""
         # Find the number of weeks needed to complete the course
-        self.estimated_weeks = estimate_number_of_weeks_to_complete()
+        self.estimated_weeks = 4
+
+        # Generate Weekly Topic
+        generate_weekly_topic(Student)
     
-    def 
 
 
 
