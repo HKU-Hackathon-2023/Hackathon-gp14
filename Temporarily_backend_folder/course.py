@@ -1,72 +1,53 @@
-import genCourse
+from langchain.schema import SystemMessage, AIMessage, HumanMessage
+
+estimate_week_complete_prompt = f"You are a teacher specialising in teaching deaf student. He is a {education_level} student"
+
+
+
+
 
 class Course:
-
-    def __init__(self, topic):
-        self.Topic = topic
-        self.Subtopics = {
-            "week1": None,
-            "week2": None,
-            "week3": None,
-            "week4": None,
+    
+    def __init__(self, subject) -> None:
+        self.subject = subject
+        self.course_name: str 
+        self.estimated_weeks: int 
+        self.weekly_teaching_schedule: {
+            "week 1": {
+                "topic": str, 
+                "sub topic": list(), 
+                "chat history": None
+            },
+            "week 2": {
+                "topic": str,
+                "sub topic": list(), 
+                "chat history": None
+            },
+            "week 3": {
+                "topic": str, 
+                "sub topic": list(), 
+                "chat history": None
+            },
+            "week 4": {
+                "topic": str, 
+                "sub topic": list(), 
+                "chat history": None
+            }
         }
-        self.week_1_topics={
-            "Name":None,
-            "Introduction": None,
-            "Explanation": None,
-            "Examples":None
-        }
-        self.week_2_topics = {
-            "Name":None,
-            "Introduction": None,
-            "Explanation": None,
-            "Examples": None
-        }
-        self.week_3_topics = {
-            "Name":None,
-            "Introduction": None,
-            "Explanation": None,
-            "Examples": None
-        }
-        self.week_4_topics = {
-            "Name":None,
-            "Introduction": None,
-            "Explanation": None,
-            "Examples": None
-        }
-        learning_materials=None
-        history=None
 
+    def generate_course_name(self):
+        """This will pass the course schedule to GPT to ask it to think a name for the course"""
+    
+    def estimate_number_of_weeks_to_complete():
+        
+        
 
-        def genSubtopics(topic):
-            SubtopicList = genCourse.GenSubtopics(topic)
-            for i in range(1, 5):
-                self.Subtopics[f"week{i}"] = (SubtopicList[i - 1])
-
-        def gen_week_1_topics(name):
-            self.week_1_topics["Name"]=name
-            self.week_1_topics["Introduction"], self.week_1_topics["Explanation"], self.week_1_topics["Examples"] = \
-                genCourse.genContents(name)
-
-        def gen_week_2_topics(name):
-            self.week_2_topics["Name"]=name
-            self.week_2_topics["Introduction"], self.week_2_topics["Explanation"], self.week_2_topics["Examples"] = \
-                genCourse.genContents(name)
-        def gen_week_3_topics(name):
-            self.week_3_topics["Name"]=name
-            self.week_3_topics["Introduction"], self.week_3_topics["Explanation"], self.week_3_topics["Examples"] = \
-                genCourse.genContents(name)
-        def gen_week_4_topics(name):
-            self.week_4_topics["Name"]=name
-            self.week_4_topics["Introduction"], self.week_4_topics["Explanation"], self.week_4_topics["Examples"] = \
-                genCourse.genContents(name)
-
-        genSubtopics(self.Topic)
-        gen_week_1_topics(self.Subtopics["week1"])
-        gen_week_2_topics(self.Subtopics[1])
-        gen_week_3_topics(self.Subtopics[2])
-        gen_week_4_topics(self.Subtopics[3])
-
+    def generate_weekly_teaching_schedule(self, estimated_week = 4):
+        """This function generate the weekly topic"""
+        # Find the number of weeks needed to complete the course
+        self.estimated_weeks = estimate_number_of_weeks_to_complete()
+    
+    def 
 
 
 
