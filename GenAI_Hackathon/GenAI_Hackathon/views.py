@@ -1,4 +1,6 @@
 from django.shortcuts import render
+import json
+from django.http import JsonResponse
 
 # Create your views here.
 def home(request):
@@ -8,8 +10,21 @@ def home(request):
     return render(request, 'index.html', context)
 
 def classroom(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        message = data.get("message")
+        print(message)
+        # Process the message or perform any desired actions
+        response_data = {"status": "success", "message": "Message received"}
+        return JsonResponse(response_data)
     context = {
         'active_item': 'classroom'
+    }
+    return render(request, 'classroom.html', context)
+
+def courses(request, course, topic):
+    context = {
+        'active_item': 'courses'
     }
     return render(request, 'classroom.html', context)
 
@@ -31,6 +46,10 @@ def dailychallenge(request):
     }
     return render(request, 'challenge.html', context)
 
-def setting(request):
+def crearCourse(request):
+    if request.method == "POST":
+        pass
 
-    return render(request, 'setting.html')
+def setting(request):
+    if request.method == "POST":
+        pass

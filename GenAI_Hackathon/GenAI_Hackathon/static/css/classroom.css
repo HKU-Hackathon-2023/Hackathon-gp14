@@ -1,0 +1,135 @@
+.card {
+	height: 95vh;
+	border-radius: 15px !important;
+}
+
+.card-footer {
+	background-color:unset;
+	margin-bottom: 15px;
+}
+
+.msg_card_body {
+	overflow-y: auto;
+}
+
+.card-footer {
+	border-radius: 0 0 15px 15px !important;
+	border-top: 0 !important;
+}
+
+.container {
+	align-content: center;
+}
+
+.type_msg {
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	border: 0 !important;
+	color: white !important;
+	height: 60px !important;
+	overflow-y: auto;
+}
+
+.type_msg:focus {
+	box-shadow: none !important;
+	outline: 0px !important;
+}
+
+.attach_btn {
+	border-radius: 15px 0 0 15px !important;
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	border: 0 !important;
+	color: white !important;
+	cursor: pointer;
+}
+
+.send_btn {
+	border-radius: 0 15px 15px 0 !important;
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	border: 0 !important;
+	color: white !important;
+	cursor: pointer;
+}
+
+.user_img {
+	height: 60px;
+	width: 60px;
+	border: 1.5px solid #f5f6fa;
+}
+
+.user_img_msg {
+	height: 40px;
+	width: 40px;
+	border: 1.5px solid #f5f6fa;
+}
+
+.img_cont {
+	position: relative;
+	height: 70px;
+	width: 70px;
+}
+
+
+.img_cont_msg {
+	height: 40px;
+	width: 40px;
+}
+
+.msg_cotainer {
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: -10px;
+	border-radius: 15px;
+	background-color: #f6f7f6;
+	padding: 10px;
+	position: relative;
+}
+
+.msg_cotainer_send {
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-right: -10px;
+	border-radius: 15px;
+	background-color: #3b3abe;
+	color: white;
+	padding: 10px;
+	position: relative;
+}
+
+.input-group-text {
+	padding: 1.375rem 0.75rem;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	margin-left: 1px;
+	background: #888;
+}
+
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+@media(max-width: 576px) {
+	.contacts_card {
+		margin-bottom: 15px !important;
+	}
+}
+
+.listening #microphone-status {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}

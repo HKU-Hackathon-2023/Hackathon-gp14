@@ -46,7 +46,7 @@
                     </span>
                     <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
                     <div class="input-group-append">
-                        <button type='submit' id="send-message" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
+                        <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
             if (xhr.status === 200) {
                 // Request completed successfully
                 var response = JSON.parse(xhr.responseText);
-
+                console.log(response);
                 var newMessageContainer = document.createElement('div');
                 newMessageContainer.classList.add('d-flex', 'justify-content-start', 'mb-4');
         
@@ -101,8 +101,7 @@
                 newMessageContent.textContent = response.message;
                 newMessageContainer.appendChild(newMessageContent);
                 messageArea.appendChild(newMessageContainer);
-                sendMessageButton.disabled = false;
-                textarea.disabled = false;
+
             } else {
                 // Request encountered an error
                 console.error("Request error:", xhr.status);
