@@ -24,8 +24,9 @@ def convert_speech_to_text(file_name):
         if cancellation_details.reason == speechsdk.CancellationReason.Error:
             print("Error details: {}".format(cancellation_details.error_details))
             print("Did you set the speech resource key and region values?")
+    return " "
 
-convert_speech_to_text('./recording_1.wav')
+temp = convert_speech_to_text('./recording_1.wav')
 
 def mic_convert_speech_to_text():
     """This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"""
@@ -49,6 +50,7 @@ def mic_convert_speech_to_text():
         if cancellation_details.reason == speechsdk.CancellationReason.Error:
             print("Error details: {}".format(cancellation_details.error_details))
             print("Did you set the speech resource key and region values?")
+    return " "
     
 
 
