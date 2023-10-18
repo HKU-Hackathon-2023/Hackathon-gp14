@@ -39,10 +39,10 @@ class Student:
             return "Successful"
         return "Course does not exist"
 
-    def course_change_week(self, user_week) -> None:
-        self.courses_database[self.current_course_name].current_week = user_week
-    
-    def course_chat(self, user_input) -> str:
+    def course_change_week(self, topic_name) -> None:
+        return self.courses_database[self.current_course_name].change_current_week(topic_name) == True
+
+    def course_speak_with_virtual_teacher(self, user_input) -> str:
         """"""
         LLM = ChatOpenAI(streaming=True, callbacks=[StreamingStdOutCallbackHandler()], temperature=0)
         if self.current_course_name == "":
@@ -56,6 +56,9 @@ class Student:
         response = LLM(course.weekly_teaching_schedule[f"week_{course.current_week}"]["chat history"]).content
         course.weekly_teaching_schedule[f"week_{course.current_week}"]["chat history"].append(AIMessage(content=response))
         return response
+
+    def lesson_custiomized_teaching():
+        
         
 
 # Test
