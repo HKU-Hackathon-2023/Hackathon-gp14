@@ -1,3 +1,8 @@
+import Course
+from langchain.schema import SystemMessage, AIMessage, HumanMessage
+from langchain.chat_models import ChatOpenAI
+from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+
 class Student:
     number_of_students = 0 # ignore for now
 
@@ -8,17 +13,57 @@ class Student:
         self.gender = gender
         self.education_level = education_level
         self.special_education_need = special_need
+        
 
         # Course
         self.courses_database = dict() # dict(course_name: course object)
+        self.current_course_name = ""
 
     def retrieve_courses_list(self) -> list:
         """return a list that contain all courses that created by the student"""
-        return self.courses_storage.keys()
+        return self.courses_database.keys()
     
     def delete_course(self, course_name: str = None) -> None:
         """delete the course from the student course database"""
-        del self.courses_storage['course_name']
+        del self.courses_database['course_name']
     
     def create_course(self, subject: str):
-        pass
+        new_course = Course.Course(self.education_level, self.special_education_need, subject)
+        course_name = new_course.course_name
+        self.courses_database[course_name] = new_course
+        self.current_course_name = course_name
+    
+    def course_select(self, user_decision) -> str:
+        """Select course to study from the created course"""
+        if user_decision in self.courses_database:
+            self.current_course_name = user_decision
+            return "Successful"
+        return "Course does not exist"
+
+    def course_change_week(self, user_week) -> None:
+        self.courses_database[self.current_course_name].current_week = user_week
+    
+    def course_chat(self, user_input) -> str:
+        """"""
+        LLM = ChatOpenAI(streaming=True, callbacks=[StreamingStdOutCallbackHandler()], temperature=0)
+        if self.current_course_name == "":
+            return "Select what course or create a course first!"
+        
+        if self.current_course_name not in self.retrieve_courses_list():
+            return "The course is not a created course"
+        
+        course = self.courses_database[self.current_course_name]
+        course.weekly_teaching_schedule[f"week_{course.current_week}"]["chat history"].append(HumanMessage(content=user_input))
+        response = LLM(course.weekly_teaching_schedule[f"week_{course.current_week}"]["chat history"]).content
+        course.weekly_teaching_schedule[f"week_{course.current_week}"]["chat history"].append(AIMessage(content=response))
+        return response
+        
+
+# Test
+new_student = Student("Stephen", 18, "M", "Secondary school - form 3", "Need detail teaching")
+new_student.create_course("Data Structure")
+while True:
+    user_input = input("Message to virtual teacher")
+    print(new_student.course_chat(user_input))
+
+
