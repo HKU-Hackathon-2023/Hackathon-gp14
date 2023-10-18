@@ -46,5 +46,10 @@ def dailychallenge(request):
     }
     return render(request, 'challenge.html', context)
 
+def crearCourse(request):
+    if request.method == "POST":
+        pass
+
 def setting(request):
-    return render(request, 'setting.html')
+    if request.method == "POST":
+        pass
