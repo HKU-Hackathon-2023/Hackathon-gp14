@@ -27,6 +27,7 @@ class Student:
         del self.courses_database['course_name']
     
     def create_course(self, subject: str):
+        """Create a new course"""
         new_course = Course.Course(self.education_level, self.special_education_need, subject)
         course_name = new_course.course_name
         self.courses_database[course_name] = new_course
@@ -39,11 +40,12 @@ class Student:
             return "Successful"
         return "Course does not exist"
 
-    def course_change_week(self, user_week) -> None:
-        self.courses_database[self.current_course_name].current_week = user_week
-    
-    def course_chat(self, user_input) -> str:
-        """"""
+    def course_change_current_topic(self, topic_name) -> None:
+        """Change the topic to study in the course"""
+        return self.courses_database[self.current_course_name].change_current_week(topic_name) == True
+
+    def course_speak_with_virtual_teacher(self, user_input) -> str:
+        """Communicate with the virtual teacher"""
         LLM = ChatOpenAI(streaming=True, callbacks=[StreamingStdOutCallbackHandler()], temperature=0)
         if self.current_course_name == "":
             return "Select what course or create a course first!"
@@ -56,13 +58,15 @@ class Student:
         response = LLM(course.weekly_teaching_schedule[f"week_{course.current_week}"]["chat history"]).content
         course.weekly_teaching_schedule[f"week_{course.current_week}"]["chat history"].append(AIMessage(content=response))
         return response
-        
+
+    def lesson_custiomized_teaching():
+        pass
 
 # Test
 new_student = Student("Stephen", 18, "M", "Secondary school - form 3", "Need detail teaching")
 new_student.create_course("Data Structure")
 while True:
     user_input = input("Message to virtual teacher")
-    print(new_student.course_chat(user_input))
+    print(new_student.course_speak_with_virtual_teacher(user_input))
 
 
