@@ -58,7 +58,8 @@ class Student:
         return response
 
     def lesson_custiomized_teaching():
-        
+        pass
+
         
 
 # Test
