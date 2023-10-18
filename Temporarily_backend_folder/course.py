@@ -63,9 +63,9 @@ class Course:
 
         genSubtopics(self.Topic)
         gen_week_1_topics(self.Subtopics["week1"])
-        gen_week_2_topics(self.Subtopics[1])
-        gen_week_3_topics(self.Subtopics[2])
-        gen_week_4_topics(self.Subtopics[3])
+        gen_week_2_topics(self.Subtopics["week2"])
+        gen_week_3_topics(self.Subtopics["week3"])
+        gen_week_4_topics(self.Subtopics["week4"])
 
 
 
