@@ -54,3 +54,12 @@ def get_teaching_instruction(student_special_education_need, teaching_instructio
     """
 
     return SystemMessage(content = system_prompt)
+
+def get_speech_convertion_system_instruction(student_education_level: str, student_special_education_need: str):
+    prompt = f"""You are a personal assistant of a deaf student. You are helping him/ her to convert what a teacher said into a level that can be understand by a {student_education_level} student.
+    Note that he/she also has {student_special_education_need}.
+
+    Understand what was said by the teacher and the history to output your response.
+    """
+
+    return [SystemMessage(content = prompt)]
