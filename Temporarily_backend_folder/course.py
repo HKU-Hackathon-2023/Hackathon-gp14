@@ -17,9 +17,6 @@ class Course:
         self.topic_list: list
         self.weekly_teaching_schedule = dict()
 
-        # instant variable - track process
-        self.current_week = 0
-
         self.generate_weekly_topics(student_education_level, student_special_education_need, subject)
         self.generate_course_name()
         self.generate_topic_teaching_instruction(student_special_education_need)

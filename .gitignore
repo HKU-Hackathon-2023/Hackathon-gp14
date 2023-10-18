@@ -1,3 +1,4 @@
 .vene/
 vene/
 __pycache__/
+.venv
