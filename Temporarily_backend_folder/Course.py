@@ -15,6 +15,7 @@ class Course:
         self.estimated_weeks: int 
         self.topic_list: list
         self.weekly_teaching_schedule = dict()
+        self.current_week = 0
 
         # Constructing the course
         self.generate_weekly_topics(student_education_level, student_special_education_need, subject)

@@ -62,13 +62,11 @@ class Student:
     def lesson_custiomized_teaching():
         pass
 
-        
-
 # Test
 new_student = Student("Stephen", 18, "M", "Secondary school - form 3", "Need detail teaching")
 new_student.create_course("Data Structure")
 while True:
     user_input = input("Message to virtual teacher")
-    print(new_student.course_chat(user_input))
+    print(new_student.course_speak_with_virtual_teacher(user_input))
 
 
