@@ -1,4 +1,5 @@
 import Course
+import prompt
 from langchain.schema import SystemMessage, AIMessage, HumanMessage
 from langchain.chat_models import ChatOpenAI
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
@@ -13,6 +14,7 @@ class Student:
         self.gender = gender
         self.education_level = education_level
         self.special_education_need = special_need
+        self.convertion_history = []
         
         # Course
         self.courses_database = dict() # dict(course_name: course object)
@@ -59,8 +61,19 @@ class Student:
         course.weekly_teaching_schedule[f"week_{course.current_week}"]["chat history"].append(AIMessage(content=response))
         return response
 
-    def lesson_custiomized_teaching():
-        pass
+    def lesson_custiomized_teaching(self, teacher_speech: str):
+        """Take in teacher speech and convert to easier understanding wording"""
+        LLM = ChatOpenAI(streaming=True, callbacks=[StreamingStdOutCallbackHandler()], temperature=0)
+        if len(self.convertion_history) == 0:
+            self.convertion_history = prompt.get_teaching_instruction(self.special_education_need, self.education_level)
+        
+        self.convertion_history.append(HumanMessage(content = teacher_speech))
+        response = LLM(self.convertion_history).content
+        self.convertion_history.append(AIMessage(content = response))
+        return response
+        
+
+
 
 # Test
 new_student = Student("Stephen", 18, "M", "Secondary school - form 3", "Need detail teaching")
