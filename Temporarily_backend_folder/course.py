@@ -2,7 +2,6 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 from langchain.schema import SystemMessage, AIMessage, HumanMessage
-import Student
 import prompt
 from langchain.chat_models import ChatOpenAI
 from langchain.llms import AzureOpenAI
@@ -10,65 +9,79 @@ import openai
 import time
 
 class Course:
-    
-    def __init__(self, subject) -> None:
+    def __init__(self, student_education_level, student_special_education_need, subject: str) -> None:
+        # instant variable
         self.subject = subject
         self.course_name: str 
         self.estimated_weeks: int 
         self.topic_list: list
         self.weekly_teaching_schedule = dict()
 
-    def estimate_weeks_required(self, student: Student, subject: str) -> int:
-        """"""
-        LLM = ChatOpenAI() # Create OpenAI instant 
-        
-        while True:
-            try:
-                estimated_week = int(LLM(prompt.get_estimated_weeks_format_instructions(student, subject)).content) # Pass the prompt into OpenAI and convert response into 
-            except Exception as e: 
-                print("estimate week required fails. Reason: ", e)
-            
-            if estimated_week > 0:
-                break
-        print("Estimated_week: ", estimated_week)
-        return estimated_week
+        # instant variable - track process
+        self.current_week = 0
 
-    def generate_weekly_topics(self, student: Student, subject: str, estimated_weeks: int) -> None:
-        """"""
-        LLM = ChatOpenAI() # Create OpenAI instant 
+        self.generate_weekly_topics(student_education_level, student_special_education_need, subject)
+        self.generate_course_name()
+        self.generate_topic_teaching_instruction(student_special_education_need)
 
-        response = LLM(prompt.get_weekly_topics_format_instructions(student, subject, estimated_weeks)).content
+
+    def generate_weekly_topics(self, student_education_level, student_special_education_need, subject: str) -> None:
+        """This function generate weekly topic for the course"""
+        LLM = ChatOpenAI(temperature=0) # Create OpenAI instant 
+
+        response = LLM(prompt.get_weekly_topics_format_instructions(student_education_level, student_special_education_need, subject)).content
         weekly_topics = response.split(",")
 
         for index in range(0, len(weekly_topics)):
             self.weekly_teaching_schedule[f"week_{index}"] = {
                 "Topic": weekly_topics[index],
-                "Check_List": list,
-                "Process": 0
+                "Topic_teaching_instruction": str,
+                "chat history": list
             }
         
         self.topic_list = weekly_topics
         self.estimated_weeks = len(weekly_topics)
-        print("Weekly topic generated: ", weekly_topics)
-        
+        print("Weekly Topic Generated: ", weekly_topics)
+        return
+
+    def generate_course_name(self) -> None:
+        LLM = ChatOpenAI(temperature=0.3) 
+        self.course_name = LLM([HumanMessage(content=f"Give a course name for this course which include topic {self.topic_list}. You must give the course name only")]).content
+        print(f"Course name decided: {self.course_name}")
+        return
+
+    def generate_topic_teaching_instruction(self, student_special_education_need,):
+        """This function generate """
+        LLM = ChatOpenAI(temperature=0) 
+        for index in range(0, 2):
+            response = LLM(prompt.get_topic_checklist_instructions( self.weekly_teaching_schedule[f"week_{index}"])).content
+            print(f"week {index} teaching instruction: ", response)
+            self.weekly_teaching_schedule[f"week_{index}"]["Topic_teaching_instruction"] = response
+            self.weekly_teaching_schedule[f"week_{index}"]["chat history"] = [prompt.teaching_instruction(student_special_education_need,self.weekly_teaching_schedule[f"week_{index}"]["Topic_teaching_instruction"])]
+            if index == 0:
+                self.weekly_teaching_schedule[f"week_{index}"]["chat history"].append(AIMessage(content="Hi, I am your teacher - Anson."))
+            time.sleep(20)
+        return 
+
     
-    def generate_topic_checklist(self, student: Student):
-        """"""
-        LLM = ChatOpenAI() 
-        for index in range(0, self.estimated_weeks):
-            response = LLM(prompt.get_topic_checklist_instructions(student, self.subject, self.weekly_teaching_schedule[f"week_{index}"]["Topic"], self.topic_list)).content
+    def change_current_week(self, week_number: int) -> None:
+        self.current_week = week_number
+        return
 
-            check_list = response.split(",")
+    def chat(self, user_message: str) -> str:
+        LLM = ChatOpenAI(temperature=0)
+        self.weekly_teaching_schedule[f"week_{self.current_week}"]["chat history"].append(HumanMessage(content=user_message))
+        response =  LLM(self.weekly_teaching_schedule[f"week_{self.current_week}"]["chat history"]).content
+        self.weekly_teaching_schedule[f"week_{self.current_week}"]["chat history"].append(AIMessage(content=response))
 
-            self.weekly_teaching_schedule[f"week_{index}"]["Check_list"] = check_list
-            print(f"week_{index} Checklist: ", check_list)
-            time.sleep(60)
+        return response
 
-student = Student.Student("Stephen", 10, "Male", "Primary School - 1", "Slow in learning")
-course = Course("Data Structure")
-estimated_weeks = course.estimate_weeks_required(student, "Data Structure")
-course.generate_weekly_topics(student, "Data Structure", estimated_weeks)
-course.generate_topic_checklist(student)
+
+
+ 
+
+
+
 
 
 
