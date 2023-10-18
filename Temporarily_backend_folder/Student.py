@@ -14,7 +14,6 @@ class Student:
         self.education_level = education_level
         self.special_education_need = special_need
         
-
         # Course
         self.courses_database = dict() # dict(course_name: course object)
         self.current_course_name = ""
