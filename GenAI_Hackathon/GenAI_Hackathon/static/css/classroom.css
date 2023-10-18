@@ -1,6 +1,11 @@
 .card {
-	height: 100vh;
+	height: 95vh;
 	border-radius: 15px !important;
+}
+
+.card-footer {
+	background-color:unset;
+	margin-bottom: 15px;
 }
 
 .msg_card_body {
