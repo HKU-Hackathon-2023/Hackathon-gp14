@@ -23,6 +23,10 @@ class Student:
     def retrieve_courses_list(self) -> list:
         """return a list that contain all courses that created by the student"""
         return self.courses_database.keys()
+
+    def get_topic_list_of_current_couese(self) -> list:
+        """Return the topic of the course that is taking by the student"""
+        return self.courses_databases[self.current_course_name].get_course_topic()
     
     def delete_course(self, course_name: str = None) -> None:
         """delete the course from the student course database"""

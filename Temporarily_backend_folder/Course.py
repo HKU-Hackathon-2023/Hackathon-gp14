@@ -62,6 +62,9 @@ class Course:
             time.sleep(20)
         return 
 
+    def get_course_topic(self) -> list:
+        """This function will return the topic list of the course"""
+        return self.topic_list
     
     def change_topic(self, topic_name: str) -> bool:
         """This function change the current topic. If fails, False, else True"""
@@ -79,6 +82,8 @@ class Course:
         self.weekly_teaching_schedule[f"week_{self.current_week}"]["chat history"].append(AIMessage(content=response))
 
         return response
+    
+    
 
 
 
