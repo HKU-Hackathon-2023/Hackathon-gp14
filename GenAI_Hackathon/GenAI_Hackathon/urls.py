@@ -23,5 +23,9 @@ urlpatterns = [
     path('note', views.note, name='note'),
     path('bookmark', views.bookmark, name='bookmark'),
     path('dailychallenge', views.dailychallenge, name='dailychallenge'),
-    path('courses/<str:course>/<str:topic>/', views.courses, name='courses')
+    path('courses/<str:course>/<str:topic>/', views.courses, name='courses'),
+
+    
+    path('crearCourse', views.crearCourse, name='crearCourse'),    
+    path('setting', views.setting, name='setting'),
 ]

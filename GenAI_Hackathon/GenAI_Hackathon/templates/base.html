@@ -66,7 +66,8 @@
         </symbol>
 
         <symbol id="clipboard-fill" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z"/>
+            <path fill-rule="evenodd"
+                d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1A2.5 2.5 0 0 0 6.5 5h3A2.5 2.5 0 0 0 12 2.5v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z" />
         </symbol>
 
         <symbol id="check-circle-fill" viewBox="0 0 16 16">
@@ -183,7 +184,8 @@
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="{% url 'home' %}" class="nav-link {% if active_item == 'home' %}active{% endif %} link-body-emphasis">
+                    <a href="{% url 'home' %}"
+                        class="nav-link {% if active_item == 'home' %}active{% endif %} link-body-emphasis">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <use xlink:href="#{% if active_item == 'home' %}home-fill {% else %}home{% endif %}" />
                         </svg>
@@ -191,10 +193,12 @@
                     </a>
                 </li>
                 <li class="nav-item disabled">
-                    <a href="#sidemenu" class="nav-link {% if active_item == 'courses' %}active{% endif %} link-body-emphasis"
+                    <a href="#sidemenu"
+                        class="nav-link {% if active_item == 'courses' %}active{% endif %} link-body-emphasis"
                         data-bs-toggle="collapse">
                         <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="#{% if active_item == 'courses' %}clipboard-fill {% else %}clipboard{% endif %} " />
+                            <use
+                                xlink:href="#{% if active_item == 'courses' %}clipboard-fill {% else %}clipboard{% endif %} " />
                         </svg>
                         Courses
                     </a>
@@ -204,8 +208,8 @@
                                 data-bs-toggle="dropdown"> course 1 </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="/courses/" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-                                        aria-pressed="false">
+                                    <a href="/courses/" class="dropdown-item d-flex align-items-center"
+                                        data-bs-theme-value="light" aria-pressed="false">
                                         Option 1
                                         <svg class="bi ms-auto opacity-50" width="1em" height="1em">
                                             <use href="#arrow-repeat"></use>
@@ -213,8 +217,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/courses/" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-                                        aria-pressed="false">
+                                    <a href="/courses/" class="dropdown-item d-flex align-items-center"
+                                        data-bs-theme-value="light" aria-pressed="false">
                                         Option 2
                                         <svg class="bi ms-auto opacity-50" width="1em" height="1em" color="green">
                                             <use href="#check-circle-fill"></use>
@@ -222,8 +226,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/courses/" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-                                        aria-pressed="false">
+                                    <a href="/courses/" class="dropdown-item d-flex align-items-center"
+                                        data-bs-theme-value="light" aria-pressed="false">
                                         Option 3
                                         <svg class="bi ms-auto opacity-50" width="1em" height="1em" color="green">
                                             <use href="#check-circle-fill"></use>
@@ -231,8 +235,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/courses/" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-                                        aria-pressed="false">
+                                    <a href="/courses/" class="dropdown-item d-flex align-items-center"
+                                        data-bs-theme-value="light" aria-pressed="false">
                                         Option 4
                                         <svg class="bi ms-auto opacity-50" width="1em" height="1em" color="green">
                                             <use href="#check-circle-fill"></use>
@@ -253,7 +257,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'note' %}" class="nav-link {% if active_item == 'note' %}active{% endif %} link-body-emphasis">
+                    <a href="{% url 'note' %}"
+                        class="nav-link {% if active_item == 'note' %}active{% endif %} link-body-emphasis">
                         <svg class="bi pe-none me-2" width="16" height="16">
                             <use xlink:href="#{% if active_item == 'note' %}pencil-fill{% else %}pencil{% endif %}" />
                         </svg>
@@ -289,11 +294,247 @@
                     <strong>Hackathon-gp14</strong>
                 </a>
                 <ul class="dropdown-menu text-small shadow">
-                    <li><a class="dropdown-item" href="#">New courses...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li>
+                        <a href="#" class="btn btn-primary dropdown-item" data-bs-toggle="modal"
+                            data-bs-target="#newCourseModal" data-bs-whatever="@mdo">New courses...</a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn btn-primary dropdown-item" data-bs-toggle="modal"
+                            data-bs-target="#settingModal" data-bs-whatever="@mdo">Settings</a>
+                    </li>
                 </ul>
+            </div>
+            <div class="modal fade" id="newCourseModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Create a new Course</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="courseName" class="form-label">Course name</label>
+                                <input type="text" class="form-control" id="courseName" placeholder="Data Structure...">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="submitCourse">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Setting: </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group input-group-sm mb-3">
+                                <span for="name" class="input-group-text ">Name</span>
+                                <input type="text" class="form-control" id="name" value="{{ user.name }}" required>
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <span for="age" class="input-group-text">Age</span>
+                                <input type="number" class="form-control" id="age" value="{{ user.age }}">
+
+                                <span for="gender" class="input-group-text">Gender</span>
+                                <select class="form-select" aria-label="Gender">
+                                    <option value="Male" {% if user.gender == 'Male' %}selected{% endif %}>Male</option>
+                                    <option value="Female" {% if user.gender == 'Female' %}selected{% endif %}>Female</option>
+                                    <option value="I am not sure" {% if user.gender == 'I am not sure' %}selected{% endif %}>I am not sure</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="educationLevel" class="form-label">Education Level</label>
+                                <select class="form-select" aria-label="Education Level" id="educationLevel">
+                                    <option value="Kindergarten" {% if user.educationLevel == 'Kindergarten' %}selected{% endif %}>Kindergarten</option>
+                                    <option value="Primary School" {% if user.educationLevel == 'Primary School' %}selected{% endif %}>Primary School</option>
+                                    <option value="Secondary School" {% if user.educationLevel == 'Secondary School' %}selected{% endif %}>Secondary School</option>
+                                    <option value="Tertiary Education" {% if user.educationLevel == 'Tertiary Education' %}selected{% endif %}>Tertiary Education</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="educationNeed" class="form-label">Special Education Need</label>
+                                <select class="form-select" aria-label="Special Education Need">
+                                    <option value=""></option>
+                                    <option value="Autism Spectrum Disorder (ASD)">Autism Spectrum Disorder (ASD)
+                                    </option>
+                                    <option value="Attention Deficit Hyperactivity Disorder (ADHD)">Attention Deficit
+                                        Hyperactivity Disorder (ADHD)</option>
+                                    <option value="Specific Learning Difficulties (SLD)">Specific Learning Difficulties
+                                        (SLD)</option>
+                                    <option value="Intellectual Disability (ID)">Intellectual Disability (ID)</option>
+                                    <option value="Speech and Language Disorders">Speech and Language Disorders</option>
+                                    <option value="6">Hearing Impairment</option>
+                                    <option value="7">Hearing Impairment</option>
+                                    <option value="8">Hearing Impairment</option>
+                                    <option value="9">Hearing Impairment</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="saveSetting">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="saveMessageBox" class="position-fixed top-0 end-0 p-3" style="display: none;">
+            <div class="alert alert-success" role="alert">
+                Saved
+            </div>
+        </div>
+
+        <div id="courseMessageBox" class="position-fixed top-0 end-0 p-3" style="display: none;">
+            <div class="alert alert-success" role="alert">
+                Course created successfully!
+            </div>
+        </div>
+        
+        <div id="alertCourseNameMessageBox" class="position-fixed top-0 end-0 p-3" style="display: none;">
+            <div class="alert alert-danger" role="alert">
+                Please fill in the course name
+            </div>
+        </div>
+
+        <div id="alertNameMessageBox" class="position-fixed top-0 end-0 p-3" style="display: none;">
+            <div class="alert alert-danger" role="alert">
+                Please fill in your name in the settings
+            </div>
+        </div>
+        <div id="alertAgeMessageBox" class="position-fixed top-0 end-0 p-3" style="display: none;">
+            <div class="alert alert-danger" role="alert">
+                Please fill in your age in the settings
+            </div>
+        </div>
+        <div id="alertEducationLevelMessageBox" class="position-fixed top-0 end-0 p-3" style="display: none;">
+            <div class="alert alert-danger" role="alert">
+                Please fill in your Education Level in the settings
             </div>
         </div>
         {% block content %}
         {% endblock %}
     </main>
+
+
+    <script>
+        document.getElementById("submitCourse").addEventListener("click", function () {
+            var courseName = document.getElementById("courseName").value;
+            
+            if (!courseName) {
+                var messageBox = document.getElementById("alertCourseNameMessageBox");
+                messageBox.style.display = "block";
+                setTimeout(function () {
+                    messageBox.style.display = "none";
+                }, 3000);
+                return;
+            }
+
+            var modal = document.getElementById("newCourseModal");
+            var bootstrapModal = bootstrap.Modal.getInstance(modal);
+            bootstrapModal.hide();
+
+            var name = document.getElementById("name").value;
+            var age = document.getElementById("age").value;
+            var educationLevel = document.getElementById("educationLevel").value;
+            
+            if (!name) {
+                var messageBox = document.getElementById("alertNameMessageBox");
+                messageBox.style.display = "block";
+                setTimeout(function () {
+                    messageBox.style.display = "none";
+                }, 3000);
+                return;
+            }
+
+            if (!age) {
+                var messageBox = document.getElementById("alertAgeMessageBox");
+                messageBox.style.display = "block";
+                setTimeout(function () {
+                    messageBox.style.display = "none";
+                }, 3000);
+                return;
+            }
+
+            if (!educationLevel) {
+                var messageBox = document.getElementById("alertEducationLevelMessageBox");
+                messageBox.style.display = "block";
+                setTimeout(function () {
+                    messageBox.style.display = "none";
+                }, 3000);
+                return;
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/crearCourse", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var messageBox = document.getElementById("courseMessageBox");
+                        messageBox.style.display = "block";
+                        setTimeout(function () {
+                            messageBox.style.display = "none";
+                        }, 3000);
+                    } else {
+                        // Request failed
+                        console.log("Error: " + xhr.status);
+                    }
+                }
+            }
+            xhr.send(JSON.stringify({
+                courseName: courseName
+            }));
+        });
+
+        document.getElementById("saveSetting").addEventListener("click", function () {
+
+            var modal = document.getElementById("settingModal");
+            var bootstrapModal = bootstrap.Modal.getInstance(modal);
+            bootstrapModal.hide();
+            
+            var name = document.getElementById("name").value;
+            var age = document.getElementById("age").value;
+            var gender = document.querySelector("select[aria-label='Gender']").value;
+            var educationLevel = document.querySelector("select[aria-label='Education Level']").value;
+            var educationNeed = document.querySelector("select[aria-label='Special Education Need']").value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/setting", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}"); // Include the CSRF token
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var messageBox = document.getElementById("saveMessageBox");
+                        messageBox.style.display = "block";
+                        setTimeout(function () {
+                            messageBox.style.display = "none";
+                        }, 3000);
+                    } else {
+                        // Request failed
+                        console.log("Error: " + xhr.status);
+                    }
+                }
+            };
+            xhr.send(JSON.stringify({
+                name: name,
+                age: age,
+                gender: gender,
+                educationLevel: educationLevel,
+                educationNeed: educationNeed
+            }));
+
+        });
+    </script>
+    {% block javascript %}
+    {% endblock %}
