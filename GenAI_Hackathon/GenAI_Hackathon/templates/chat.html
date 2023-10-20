@@ -22,18 +22,7 @@
         </div>
         <div class="col card">
             <div class="card-body msg_card_body">
-                <!-- user -->
-                <div class="d-flex justify-content-end mb-4">
-                    <div class="msg_cotainer_send">
-                        Ok, thank you have a good day
-                    </div>
-                </div>
-                <!-- chatbot  -->
-                <div class="d-flex justify-content-start mb-4">
-                    <div class="msg_cotainer">
-                        I am looking for your next templates
-                    </div>
-                </div>
+                
             </div>
             <div class="card-footer">
                 <div class="input-group">
@@ -44,7 +33,7 @@
                         <input type="file" id="file_input" class="file_upload" style="display: none;">
                     </span>
                     <textarea name="" class="form-control type_msg" placeholder="Type your message..."></textarea>
-                    <div class="input-group-append">
+                    <div class="input-group-append" id="send-message">
                         <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
                     </div>
                 </div>
@@ -66,6 +55,15 @@
     let isRecording = false;
     let mediaRecorder;
     let chunks = [];
+
+    var url = new URL(window.location.href);
+    var path = url.pathname;
+
+    if (path.includes("classroom")) {
+        requestURL = "/chat/classroom"
+    } else {
+        requestURL = "/chat"
+    }
 
     function startRecording() {
         navigator.mediaDevices.getUserMedia({ audio: true })
@@ -92,19 +90,45 @@
         });
     }
 
+    function userMessage(message) {
+        var newMessageContainer = document.createElement('div');
+        newMessageContainer.classList.add('d-flex', 'justify-content-end', 'mb-4');
+    
+        var newMessageContent = document.createElement('div');
+        newMessageContent.classList.add('msg_cotainer_send');
+
+        newMessageContent.textContent = message;
+        newMessageContainer.appendChild(newMessageContent);
+        messageArea.appendChild(newMessageContainer);
+    }
+
+    function chatBotMessage(message) {
+        var newMessageContainer = document.createElement('div');
+        newMessageContainer.classList.add('d-flex', 'justify-content-start', 'mb-4');
+
+        var newMessageContent = document.createElement('div');
+        newMessageContent.classList.add('msg_cotainer');
+
+        newMessageContent.textContent = message;
+        newMessageContainer.appendChild(newMessageContent);
+        messageArea.appendChild(newMessageContainer);
+
+        sendMessageButton.disabled = false;
+        textarea.disabled = false;
+
+    }
+
     function stopRecording() {
         mediaRecorder.stop();
     }
 
     microphoneButton.addEventListener('click', function() {
-        console.log('hi')
         microphoneButton.classList.toggle('listening');
         if (microphoneButton.classList.contains('listening')) {
         microphoneButton.querySelector('i').style.display = 'none';
         microphoneStatus.classList.remove('d-none');
         // startRecording();
         } else {
-        console.log('hi')
         microphoneStatus.classList.add('d-none');
         // Add the following line to hide the microphone icon
         microphoneButton.querySelector('i').style.display = 'block';
@@ -113,53 +137,67 @@
         }
     });
 
-    sendMessageButton.addEventListener('click', function() {
+    sendMessageButton.addEventListener('click', async function() {
         if (textarea.value == "") {
-        return;
+            return;
         }
+
         var message = textarea.value;
+        userMessage(message);
+
         textarea.value = "";
-        var newMessageContainer = document.createElement('div');
-        newMessageContainer.classList.add('d-flex', 'justify-content-end', 'mb-4');
-    
-        var newMessageContent = document.createElement('div');
-        newMessageContent.classList.add('msg_cotainer_send');
-    
-        newMessageContent.textContent = message;
-    
         sendMessageButton.disabled = true;
         textarea.disabled = true;
-    
-        newMessageContainer.appendChild(newMessageContent);
-        messageArea.appendChild(newMessageContainer);
 
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/classroom", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}"); // Include the CSRF token
-        xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                // Request completed successfully
-                var response = JSON.parse(xhr.responseText);
-                console.log(response);
-                var newMessageContainer = document.createElement('div');
-                newMessageContainer.classList.add('d-flex', 'justify-content-start', 'mb-4');
-        
-                var newMessageContent = document.createElement('div');
-                newMessageContent.classList.add('msg_cotainer');
+        // Function to continuously read the stream and display messages
+        function readStream() {
+            reader.read().then(function(result) {
+            if (!result.done) {
+                // Display the message from the stream
+                chatBotMessage(result.value);
 
-                newMessageContent.textContent = response.message;
-                newMessageContainer.appendChild(newMessageContent);
-                messageArea.appendChild(newMessageContainer);
-
+                // Continue reading the stream
+                readStream();
             } else {
-                // Request encountered an error
-                console.error("Request error:", xhr.status);
+                // Enable the input fields after stream ends
+                sendMessageButton.disabled = false;
+                textarea.disabled = false;
             }
+            });
         }
-        };
-        xhr.send(JSON.stringify({ message: message }));
-    });
+
+        // Initialize the ReadableStream
+        var stream = new ReadableStream({
+            start(controller) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", requestURL, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // Request completed successfully
+                    var response = JSON.parse(xhr.responseText);
+                    controller.enqueue(response.message);
+                } else {
+                    // Request encountered an error
+                    console.error("Request error:", xhr.status);
+                    controller.error("Request error");
+                }
+                controller.close();
+                }
+            };
+
+            xhr.send(JSON.stringify({ message: message }));
+            },
+        });
+
+        // Create a ReadableStreamReader to read the stream
+        var reader = stream.getReader();
+
+        // Call the function to start reading the stream
+        readStream();
+        });
 </script>
 {% endblock %}

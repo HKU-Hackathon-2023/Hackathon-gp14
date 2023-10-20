@@ -211,7 +211,7 @@
                                     <ul class="dropdown-menu">
                                         {% for topic in course.topics %}
                                         <li>
-                                            <a href="/courses/" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
+                                            <a href="/courses/{{ course.name|urlize }}/{{ topic|urlize }}"" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
                                                 aria-pressed="false">
                                                 {{ topic }}
                                                 <svg class="bi ms-auto opacity-50" width="1em" height="1em">
@@ -459,11 +459,13 @@
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
+                        location.reload();
                         var messageBox = document.getElementById("courseMessageBox");
                         messageBox.style.display = "block";
                         setTimeout(function () {
                             messageBox.style.display = "none";
                         }, 3000);
+                        
                     } else {
                         // Request failed
                         console.log("Error: " + xhr.status);

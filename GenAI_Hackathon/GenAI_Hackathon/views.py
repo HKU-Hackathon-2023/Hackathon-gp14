@@ -27,8 +27,9 @@ def classroom(request):
     return render(request, 'chat.html', context)
 
 def courses(request, course, topic):
+    print(course, topic)
     context['page'] = 'courses'
-    context['student'].course_change_current_topic(topic)
+    #context['student'].course_change_current_topic(topic)
     return render(request, 'chat.html', context)
 
 def note(request):
@@ -47,22 +48,18 @@ def chat(request, classroom=None):
     if request.method == "POST":
         print(1)
         data = json.loads(request.body)
-        message = data.get("message")
+        uesr_message = data.get("message")
         print(classroom)
         if (classroom == "classroom"):
             if ('student' not in context):
-                print(4)
                 context['student'] = Student.Student('user', 18, "F", "Secondary School F5", "Can not understand abstract wording")
-            print(3)
-
-            message = context['student'].lesson_custiomized_teaching(message)
+            message = context['student'].lesson_custiomized_teaching(uesr_message)
             response_data = {"status": "success", "message": message}
 
             return JsonResponse(response_data)
         else:
-            print(2)
             if ('student' in context):
-                message = context['student'].course_speak_with_virtual_teacher(message)
+                message = context['student'].course_speak_with_virtual_teacher(uesr_message)
                 response_data = {"status": "success", "message": message}
             else:
                 response_data = {"status": "not success", "message": "cant load!"}
@@ -125,11 +122,12 @@ def setting(request):
 
 def update_context():
     course_list = context['student'].retrieve_courses_list()
+    context['courses'] = []
     for course in course_list:
         course_dir = {}
         course_dir["name"] = course
-        course_dir["topics"] = [topic.replace(" ", "-") for topic in context['student'].get_topic_list_of_current_couese()]
-
+        course_dir["topics"] = context['student'].get_topic_list_of_current_couese()
+        print(course_dir["topics"])
         context['courses'].append(course_dir)
 
 def voice_to_text(request):
