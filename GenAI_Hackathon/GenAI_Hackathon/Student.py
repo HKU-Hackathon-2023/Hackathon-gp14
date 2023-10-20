@@ -48,7 +48,7 @@ class Student:
 
     def course_change_current_topic(self, topic_name) -> None:
         """Change the topic to study in the course"""
-        return self.courses_database[self.current_course_name].change_current_week(topic_name) == True
+        return self.courses_database[self.current_course_name].change_topic(topic_name) == True
 
     def course_speak_with_virtual_teacher(self, user_input) -> str:
         """Communicate with the virtual teacher"""
