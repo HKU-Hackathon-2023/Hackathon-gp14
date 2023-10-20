@@ -8,7 +8,7 @@
             <div class="card-body">
                 <h5 class="card-title">Data Structure and Algorithm</h5>
                 <p class="card-text"></p>
-                <button href="#" class="btn btn-primary">Create course</button>
+                <button href="#" class="btn btn-primary" id="createCourse-1">Create course</button>
             </div>
         </div>
     </div>
@@ -18,7 +18,7 @@
             <img src="{% static 'asset/aristotle-work-bio.jpg' %}" class="card-img-top" alt="" width="300" height="300" style="object-fit:cover;">
             <div class="card-body">
                 <h5 class="card-title">Philosophy</h5>
-                <a href="#" class="btn btn-primary">Create course</a>
+                <button href="#" class="btn btn-primary" id="createCourse-2">Create course</button>
             </div>
         </div>
     </div>
@@ -28,9 +28,49 @@
             <img src="{% static 'asset/bio.jpg' %}" class="card-img-top" alt="" width="300" height="300" style="object-fit:cover;">
             <div class="card-body">
                 <h5 class="card-title">Biology</h5>
-                <a href="#" class="btn btn-primary">Create course</a>
+                <button href="#" class="btn btn-primary" id="createCourse-3" >Create course</button>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    function createHomeCourse(courseName) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/crearCourse", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    location.reload();
+                    var messageBox = document.getElementById("courseMessageBox");
+                    messageBox.style.display = "block";
+                    setTimeout(function () {
+                        messageBox.style.display = "none";
+                    }, 3000);
+                    
+                } else {
+                    // Request failed
+                    console.log("Error: " + xhr.status);
+                }
+            }
+        }
+        xhr.send(JSON.stringify({
+            courseName: courseName
+        }));
+    }
+    document.getElementById("createCourse-1").addEventListener("click", function () {
+        createHomeCourse("Data Structure and Algorithm")
+    });
+    document.getElementById("createCourse-2").addEventListener("click", function () {
+        createHomeCourse("Philosophy")
+    });
+    document.getElementById("createCourse-3").addEventListener("click", function () {
+        createHomeCourse("Biology")
+    });
+</script>
 {% endblock %}
