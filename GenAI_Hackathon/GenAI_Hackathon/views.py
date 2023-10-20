@@ -49,17 +49,26 @@ def chat(request, classroom=None):
         print(1)
         data = json.loads(request.body)
         uesr_message = data.get("message")
+        print(uesr_message)
         print(classroom)
         if (classroom == "classroom"):
             if ('student' not in context):
                 context['student'] = Student.Student('user', 18, "F", "Secondary School F5", "Can not understand abstract wording")
             message = context['student'].lesson_custiomized_teaching(uesr_message)
+            
             response_data = {"status": "success", "message": message}
 
             return JsonResponse(response_data)
         else:
+            print(context)
             if ('student' in context):
-                message = context['student'].course_speak_with_virtual_teacher(uesr_message)
+                print(uesr_message)
+                try:
+                    message = context['student'].course_speak_with_virtual_teacher(uesr_message)
+                except Exception as e:
+                    print(e)
+                    exit(0)
+
                 response_data = {"status": "success", "message": message}
             else:
                 response_data = {"status": "not success", "message": "cant load!"}

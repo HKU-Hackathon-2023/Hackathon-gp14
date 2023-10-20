@@ -60,7 +60,11 @@ class Student:
             return "The course is not a created course"
         
         course = self.courses_database[self.current_course_name]
-        course.weekly_teaching_schedule[f"week_{course.current_week}"]["chat history"].append(HumanMessage(content=user_input))
+        try: 
+            course.weekly_teaching_schedule[f"week_{course.current_week}"]["chat history"].append(HumanMessage(content=user_input))
+        except Exception as e:
+            print(e)
+            exit(0)
         response = LLM(course.weekly_teaching_schedule[f"week_{course.current_week}"]["chat history"]).content
         course.weekly_teaching_schedule[f"week_{course.current_week}"]["chat history"].append(AIMessage(content=response))
         return response

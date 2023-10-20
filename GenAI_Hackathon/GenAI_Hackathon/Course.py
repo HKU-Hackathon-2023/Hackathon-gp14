@@ -26,8 +26,11 @@ class Course:
     def generate_weekly_topics(self, student_education_level, student_special_education_need, subject: str) -> None:
         """This function generate weekly topic for the course"""
         LLM = ChatOpenAI(temperature=0) # Create OpenAI instant 
-
-        response = LLM(prompt.get_weekly_topics_format_instructions(student_education_level, student_special_education_need, subject)).content
+        try: 
+            response = LLM(prompt.get_weekly_topics_format_instructions(student_education_level, student_special_education_need, subject)).content
+        except Exception as e:
+            print(e)
+            exit(1)
         weekly_topics = response.split(",")
         self.topic_list = weekly_topics
 
@@ -35,7 +38,7 @@ class Course:
             self.weekly_teaching_schedule[f"week_{index}"] = {
                 "Topic": weekly_topics[index],
                 "Topic_teaching_instruction": str,
-                "chat history": list
+                "chat history":list()
             }
         
         self.estimated_weeks = len(weekly_topics)

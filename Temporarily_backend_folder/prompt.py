@@ -36,7 +36,7 @@ def get_topic_checklist_instructions(topic: str) -> int:
     
     Don't not overlap with other week topics: {result}
 
-    You must output your response item by item seperate by comma. Each item should be an at least 30 word long description with how deep it should be or it is just an introduction. 
+    You must output your response item by item seperate by comma. Each item should be just 30 word long description with how deep it should be or it is just an introduction. 
     
     """ 
 
