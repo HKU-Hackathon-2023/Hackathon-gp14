@@ -28,4 +28,5 @@ urlpatterns = [
     
     path('crearCourse', views.crearCourse, name='crearCourse'),    
     path('setting', views.setting, name='setting'),
+    path('voice_to_text', views.voice_to_text, name='voice_to_text')
 ]

@@ -1,8 +1,9 @@
 from django.shortcuts import render
 import json
 from django.http import JsonResponse
-
+import azure.cognitiveservices.speech as speechsdk
 from .Student import *
+
 
 context = {
     'page': 'home',
@@ -101,3 +102,29 @@ def setting(request):
                          "educationLevel": educationLevel,
                          "educationNeed": educationNeed}
         return JsonResponse(response_data) 
+
+def voice_to_text(request):
+    try:
+        service_region = "eastasia"
+        subscription_key = "c08374bc35f74d46b1442fe01b4fcdc9"
+
+        speech_config = speechsdk.SpeechConfig(subscription=subscription_key, region=service_region)
+        speech_config.speech_recognition_language = "en-US"
+
+        audio_config = speechsdk.audio.AudioConfig(use_default_microphone=True)
+        speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
+
+        speech_recognition_result = speech_recognizer.recognize_once_async().get()
+
+        if speech_recognition_result.reason == speechsdk.ResultReason.RecognizedSpeech:
+            return JsonResponse({"status": "success", "text": speech_recognition_result.text})
+        elif speech_recognition_result.reason == speechsdk.ResultReason.NoMatch:
+            return JsonResponse({"status": "error", "message": "No speech could be recognized"})
+        elif speech_recognition_result.reason == speechsdk.ResultReason.Canceled:
+            cancellation_details = speech_recognition_result.cancellation_details
+            if cancellation_details.reason == speechsdk.CancellationReason.Error:
+                return JsonResponse({"status": "error", "message": "Speech Recognition canceled: {}".format(cancellation_details.error_details)})
+        return JsonResponse({"status": "error", "message": "Unknown error occurred"})
+    except Exception as e:
+        return JsonResponse({"status": "error", "message": str(e)})
+
