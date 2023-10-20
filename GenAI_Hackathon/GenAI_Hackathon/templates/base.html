@@ -204,46 +204,25 @@
                     </a>
                     <ul class="nav collapse ms-1 flex-column" id="sidemenu" data-bs-parent="#menu">
                         <li class="nav-item">
-                            <a class="nav-link dropdown-toggle" herf="#" id="dropdownMenuLink"
-                                data-bs-toggle="dropdown"> course 1 </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="/courses/" class="dropdown-item d-flex align-items-center"
-                                        data-bs-theme-value="light" aria-pressed="false">
-                                        Option 1
-                                        <svg class="bi ms-auto opacity-50" width="1em" height="1em">
-                                            <use href="#arrow-repeat"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/courses/" class="dropdown-item d-flex align-items-center"
-                                        data-bs-theme-value="light" aria-pressed="false">
-                                        Option 2
-                                        <svg class="bi ms-auto opacity-50" width="1em" height="1em" color="green">
-                                            <use href="#check-circle-fill"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/courses/" class="dropdown-item d-flex align-items-center"
-                                        data-bs-theme-value="light" aria-pressed="false">
-                                        Option 3
-                                        <svg class="bi ms-auto opacity-50" width="1em" height="1em" color="green">
-                                            <use href="#check-circle-fill"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/courses/" class="dropdown-item d-flex align-items-center"
-                                        data-bs-theme-value="light" aria-pressed="false">
-                                        Option 4
-                                        <svg class="bi ms-auto opacity-50" width="1em" height="1em" color="green">
-                                            <use href="#check-circle-fill"></use>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
+                            <!-- template_name.html -->
+                            {% if courses %}
+                                {% for course in courses %}
+                                    <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown">{{ course.name }}</a>
+                                    <ul class="dropdown-menu">
+                                        {% for topic in course.topics %}
+                                        <li>
+                                            <a href="/courses/" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
+                                                aria-pressed="false">
+                                                {{ topic }}
+                                                <svg class="bi ms-auto opacity-50" width="1em" height="1em">
+                                                    <use href="#arrow-repeat"></use>
+                                                </svg>
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endfor %}
+                            {% endif %}
                         </li>
                     </ul>
                 </li>
