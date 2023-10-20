@@ -25,8 +25,10 @@ urlpatterns = [
     path('dailychallenge', views.dailychallenge, name='dailychallenge'),
     path('courses/<str:course>/<str:topic>/', views.courses, name='courses'),
 
-    
+    path('chat', views.chat, name='chat'),
+    path('chat/<str:classroom>', views.chat, name='chat'),
     path('crearCourse', views.crearCourse, name='crearCourse'),    
     path('setting', views.setting, name='setting'),
+
     path('voice_to_text', views.voice_to_text, name='voice_to_text')
 ]

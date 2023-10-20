@@ -2,7 +2,6 @@ from django.shortcuts import render
 import json
 from django.http import JsonResponse
 
-
 from . import Student
 
 context = {
@@ -25,20 +24,12 @@ def classroom(request):
         response_data = {"status": "success", "message": "Message received"}
         return JsonResponse(response_data)
     context['page'] = 'classroom'
-    return render(request, 'classroom.html', context)
+    return render(request, 'chat.html', context)
 
 def courses(request, course, topic):
     context['page'] = 'courses'
     context['student'].course_change_current_topic(topic)
-    if request.method == "POST":
-        data = json.loads(request.body)
-        message = data.get("message")
-        print(message)
-        # Process the message or perform any desired actions
-        # message = context['student'].course_speak_with_virtual_teacher(message)
-        response_data = {"status": "success", "message": message}
-        return JsonResponse(response_data)
-    return render(request, 'classroom.html', context)
+    return render(request, 'chat.html', context)
 
 def note(request):
     context['page'] = 'note'    
@@ -51,6 +42,33 @@ def bookmark(request):
 def dailychallenge(request):
     context['page'] = 'challenge' 
     return render(request, 'challenge.html', context)
+
+def chat(request, classroom=None):
+    if request.method == "POST":
+        print(1)
+        data = json.loads(request.body)
+        message = data.get("message")
+        print(classroom)
+        if (classroom == "classroom"):
+            if ('student' not in context):
+                print(4)
+                context['student'] = Student.Student('user', 18, "F", "Secondary School F5", "Can not understand abstract wording")
+            print(3)
+
+            message = context['student'].lesson_custiomized_teaching(message)
+            response_data = {"status": "success", "message": message}
+
+            return JsonResponse(response_data)
+        else:
+            print(2)
+            if ('student' in context):
+                message = context['student'].course_speak_with_virtual_teacher(message)
+                response_data = {"status": "success", "message": message}
+            else:
+                response_data = {"status": "not success", "message": "cant load!"}
+            return JsonResponse(response_data)
+        
+            
 
 def crearCourse(request):
     if request.method == "POST":
@@ -79,13 +97,6 @@ def setting(request):
         context['user']['educationLevel'] = educationLevel
         context['user']['educationNeed'] = educationNeed
 
-        # Store values in session
-        request.session['name'] = name
-        request.session['age'] = age
-        request.session['gender'] = gender
-        request.session['educationLevel'] = educationLevel
-        request.session['educationNeed'] = educationNeed
-
         if context['user']['gender'] == 'Male':
             gender = 'M'
         elif context['user']['gender'] == 'Female':
@@ -94,7 +105,6 @@ def setting(request):
             gender = ''
 
         context['student'] = Student.Student(context['user']['name'], int(context['user']['age']), gender, context['user']['educationLevel'], context['user']['educationNeed'])
-        
         response_data = {"status": "success"}
         return JsonResponse(response_data)
     
@@ -118,7 +128,8 @@ def update_context():
     for course in course_list:
         course_dir = {}
         course_dir["name"] = course
-        course_dir["topics"] = context['student'].get_topic_list_of_current_couese()
+        course_dir["topics"] = [topic.replace(" ", "-") for topic in context['student'].get_topic_list_of_current_couese()]
+
         context['courses'].append(course_dir)
 
 def voice_to_text(request):
