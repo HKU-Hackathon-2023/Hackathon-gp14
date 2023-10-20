@@ -75,15 +75,4 @@ class Student:
         response = LLM(self.convertion_history).content
         self.convertion_history.append(AIMessage(content = response))
         return response
-        
-
-
-
-# Test
-new_student = Student("Stephen", 18, "M", "Secondary school - form 3", "Need detail teaching")
-new_student.create_course("Data Structure")
-while True:
-    user_input = input("Message to virtual teacher")
-    print(new_student.course_speak_with_virtual_teacher(user_input))
-
 
