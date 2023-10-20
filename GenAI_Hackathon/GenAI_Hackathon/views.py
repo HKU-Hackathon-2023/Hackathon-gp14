@@ -2,10 +2,12 @@ from django.shortcuts import render
 import json
 from django.http import JsonResponse
 
+from .Student import *
+
 context = {
     'page': 'home',
     'user': {'name': '', 'age': '', 'gender': 'Male', 'educationLevel': '', 'educationNeed': ''},
-    'course' : {}
+    'course': []
 }
 
 
@@ -45,7 +47,10 @@ def crearCourse(request):
     if request.method == "POST":
         data = json.loads(request.body)
         courseName = data.get("courseName")
-        # create courses and store it in context['course]
+        # create courses
+        if 'student' in context:
+            context['student'].create_course(courseName)
+        
         response_data = {"status": "success"}
         return JsonResponse(response_data)
 
@@ -71,6 +76,15 @@ def setting(request):
         request.session['educationLevel'] = educationLevel
         request.session['educationNeed'] = educationNeed
 
+        if context['user']['gender'] == 'Male':
+            gender = 'M'
+        elif context['user']['gender'] == 'Female':
+            gender = 'F'
+        else:
+            gender = ''
+
+        context['student'] = Student(context['user']['name'], int(context['user']['age']), gender, context['user']['educationLevel'], context['user']['educationNeed'])
+        
         response_data = {"status": "success"}
         return JsonResponse(response_data)
     
