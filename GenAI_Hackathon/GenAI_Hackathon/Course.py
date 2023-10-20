@@ -35,7 +35,7 @@ class Course:
             self.weekly_teaching_schedule[f"week_{index}"] = {
                 "Topic": weekly_topics[index],
                 "Topic_teaching_instruction": str,
-                "chat history": list
+                "chat history": list()
             }
         
         self.estimated_weeks = len(weekly_topics)
