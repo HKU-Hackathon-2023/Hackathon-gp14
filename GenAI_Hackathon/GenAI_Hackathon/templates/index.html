@@ -1,1 +1,36 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'asset/datastructure.jpeg' %}" class="card-img-top" alt="..." width="300" height="300" style="object-fit:cover;">
+            <div class="card-body">
+                <h5 class="card-title">Data Structure and Algorithm</h5>
+                <p class="card-text"></p>
+                <button href="#" class="btn btn-primary">Create course</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'asset/aristotle-work-bio.jpg' %}" class="card-img-top" alt="" width="300" height="300" style="object-fit:cover;">
+            <div class="card-body">
+                <h5 class="card-title">Philosophy</h5>
+                <a href="#" class="btn btn-primary">Create course</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <img src="{% static 'asset/bio.jpg' %}" class="card-img-top" alt="" width="300" height="300" style="object-fit:cover;">
+            <div class="card-body">
+                <h5 class="card-title">Biology</h5>
+                <a href="#" class="btn btn-primary">Create course</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
