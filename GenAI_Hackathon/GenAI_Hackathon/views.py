@@ -6,8 +6,9 @@ from . import Student
 
 context = {
     'page': 'home',
-    'user': {'name': '', 'age': '', 'gender': 'Male', 'educationLevel': '', 'educationNeed': ''},
+    'user': {'name': 'Fung', 'age': '18', 'gender': 'Male', 'educationLevel': '', 'educationNeed': ''},
     'courses': [],
+    'student': Student.Student('Fung', 18, "F", "Secondary School", "Can not understand abstract wording"),
 }
 
 # Create your views here.
