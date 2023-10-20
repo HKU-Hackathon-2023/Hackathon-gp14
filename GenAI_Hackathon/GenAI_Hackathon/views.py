@@ -3,12 +3,13 @@ import json
 from django.http import JsonResponse
 
 
+from . import Student
+
 context = {
     'page': 'home',
     'user': {'name': '', 'age': '', 'gender': 'Male', 'educationLevel': '', 'educationNeed': ''},
-    'course': []
+    'courses': [],
 }
-
 
 # Create your views here.
 def home(request):
@@ -28,6 +29,15 @@ def classroom(request):
 
 def courses(request, course, topic):
     context['page'] = 'courses'
+    context['student'].course_change_current_topic(topic)
+    if request.method == "POST":
+        data = json.loads(request.body)
+        message = data.get("message")
+        print(message)
+        # Process the message or perform any desired actions
+        # message = context['student'].course_speak_with_virtual_teacher(message)
+        response_data = {"status": "success", "message": message}
+        return JsonResponse(response_data)
     return render(request, 'classroom.html', context)
 
 def note(request):
@@ -49,8 +59,9 @@ def crearCourse(request):
         # create courses
         if 'student' in context:
             context['student'].create_course(courseName)
-        
-        response_data = {"status": "success"}
+            update_context()
+            print(context)
+        response_data = {"status": "course: success"}
         return JsonResponse(response_data)
 
 def setting(request):
@@ -82,7 +93,7 @@ def setting(request):
         else:
             gender = ''
 
-        context['student'] = Student(context['user']['name'], int(context['user']['age']), gender, context['user']['educationLevel'], context['user']['educationNeed'])
+        context['student'] = Student.Student(context['user']['name'], int(context['user']['age']), gender, context['user']['educationLevel'], context['user']['educationNeed'])
         
         response_data = {"status": "success"}
         return JsonResponse(response_data)
@@ -100,6 +111,15 @@ def setting(request):
                          "educationLevel": educationLevel,
                          "educationNeed": educationNeed}
         return JsonResponse(response_data) 
+
+
+def update_context():
+    course_list = context['student'].retrieve_courses_list()
+    for course in course_list:
+        course_dir = {}
+        course_dir["name"] = course
+        course_dir["topics"] = context['student'].get_topic_list_of_current_couese()
+        context['courses'].append(course_dir)
 
 def voice_to_text(request):
     try:
